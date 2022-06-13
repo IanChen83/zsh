@@ -8,6 +8,7 @@ else
 fi
 
 # Tools
+alias vim="nvim"
 alias cat="bat"
 alias diff="delta"
 
