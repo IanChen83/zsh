@@ -29,10 +29,14 @@ setopt HIST_BEEP                 # Beep when accessing non-existent history.
 zstyle -s ':prezto:module:history' histfile '_pmh_histfile' || _pmh_histfile="${HISTFILE:-${ZDOTDIR:-$HOME}/.zsh_history}"
 zstyle -s ':prezto:module:history' histsize '_pmh_histsize' || _pmh_histsize=10000
 zstyle -s ':prezto:module:history' savehist '_pmh_savehist' || _pmh_savehist=${_pmh_histsize}
+zstyle -s ':prezto:module:history' histcontrol '_pmh_histcontrol' || _pmh_histcontrol=${ignoredups}
+zstyle -s ':prezto:module:history' histignore '_pmh_histignore' || _pmh_histignore=""
 HISTFILE="${_pmh_histfile}"  # The path to the history file.
 HISTSIZE="${_pmh_histsize}"  # The maximum number of events to save in the internal history.
 SAVEHIST="${_pmh_savehist}"  # The maximum number of events to save in the history file.
-unset _pmh_{hist{file,size},savehist}
+HISTCONTROL="${_pmh_histcontrol}"  # The history control options.
+HISTIGNORE="${_pmh_histignore}"  # The history ignore options.
+unset _pmh_{hist{file,size,control,ignore},savehist}
 
 #
 # Aliases

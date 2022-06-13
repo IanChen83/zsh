@@ -21,11 +21,13 @@ if [[ -z "$EDITOR" ]]; then
   export EDITOR='nano'
 fi
 if [[ -z "$VISUAL" ]]; then
-  export VISUAL='nano'
+  export VISUAL='nvim'
 fi
 if [[ -z "$PAGER" ]]; then
   export PAGER='less'
 fi
+export GIT_EDITOR=nvim
+export SUDO_EDITOR=/usr/bin/nvim
 
 #
 # Language
@@ -49,10 +51,8 @@ typeset -gU cdpath fpath mailpath path
 
 # Set the list of directories that Zsh searches for programs.
 path=(
-  $HOME/{,s}bin(N)
-  /opt/{homebrew,local}/{,s}bin(N)
-  /usr/local/{,s}bin(N)
   $path
+  /opt/{homebrew,local}/{,s}bin(N)
 )
 
 #
@@ -63,7 +63,7 @@ path=(
 # Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
 # Remove -X to enable it.
 if [[ -z "$LESS" ]]; then
-  export LESS='-g -i -M -R -S -w -X -z-4'
+  export LESS='--use-color -M -R -S -w -z-4 -Dd+c$Du+g$Ds-m'
 fi
 
 # Set the Less input preprocessor.

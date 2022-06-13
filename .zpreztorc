@@ -86,6 +86,9 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 #
 # History
 #
+zstyle ':prezto:module:history' histfile "${HOME}/.zsh_history"
+zstyle ':prezto:module:history' histignore "rm:ls:cd:cd -:pwd:exit:date:* --help"
+zstyle ':prezto:module:history' histcontrol "ignoredups"
 
 # Set the file to save the history in when an interactive shell exits.
 # zstyle ':prezto:module:history' histfile "${ZDOTDIR:-$HOME}/.zsh_history"
@@ -130,7 +133,7 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'sorin'
+zstyle ':prezto:module:prompt' theme 'pure'
 
 # Set the working directory prompt display length.
 # By default, it is set to 'short'. Set it to 'long' (without '~' expansion)
