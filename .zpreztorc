@@ -8,12 +8,15 @@
 #
 # General
 #
+zstyle ':prezto:load' pmodule-allow-overrides 'yes'
 
 # Set case-sensitivity for completion, history lookup, etc.
 # zstyle ':prezto:*:*' case-sensitive 'yes'
 
 # Color output (auto set to 'no' on dumb terminals).
 zstyle ':prezto:*:*' color 'yes'
+zstyle ':prezto:environment:termcap' color 'yes'
+
 
 # Add additional directories to load prezto modules from
 # zstyle ':prezto:load' pmodule-dirs $HOME/.zprezto-contrib
@@ -35,7 +38,9 @@ zstyle ':prezto:load' pmodule \
   'editor' \
   'history' \
   'directory' \
+  'git' \
   'ssh' \
+  'syntax-highlighting' \
   'spectrum' \
   'utility' \
   'completion' \
@@ -76,7 +81,7 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 
 # Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'.
 # zstyle ':prezto:module:git:status:ignore' submodules 'all'
-
+zstyle ':prezto:module:git:alias' skip 'yes'
 #
 # GNU Utility
 #
