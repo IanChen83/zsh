@@ -126,6 +126,7 @@ function pmodload {
         done
       }
 
+      [[ $_debug == 'yes' ]] && echo "Loading ${pmodule} from ${pmodule_location}"
       if [[ -s "${pmodule_location}/init.zsh" ]]; then
         source "${pmodule_location}/init.zsh"
       elif [[ -s "${pmodule_location}/${pmodule}.plugin.zsh" ]]; then
@@ -175,11 +176,20 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zpreztorc" ]]; then
   source "${ZDOTDIR:-$HOME}/.zpreztorc"
 fi
 
+# prezto global debug message switch
+zstyle -s ':prezto' debug '_debug' || _debug='no'
+
 # Disable color and theme in dumb terminals.
 if [[ "$TERM" == 'dumb' ]]; then
   zstyle ':prezto:*:*' color 'no'
   zstyle ':prezto:module:prompt' theme 'off'
 fi
+
+# Load envs
+for envFile in ${ZPREZTODIR}/env/*(.); do
+  [[ $_debug == 'yes' ]] && echo "Load env from ${envFile}"
+  source "$envFile"
+done
 
 # Load Zsh modules.
 zstyle -a ':prezto:load' zmodule 'zmodules'
@@ -198,3 +208,5 @@ unset zfunction{s,}
 zstyle -a ':prezto:load' pmodule 'pmodules'
 pmodload "$pmodules[@]"
 unset pmodules
+
+unset _debug

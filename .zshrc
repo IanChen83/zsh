@@ -3,6 +3,9 @@
 #
 # To configure Prezto, modify .zpreztorc
 
+# utility module will translate it to proper aliase
+alias ls="gls"
+
 zprezto_script="${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 if [[ -s "${zprezto_script}" ]]; then
   source "${zprezto_script}"

@@ -8,7 +8,9 @@
 #
 # General
 #
-zstyle ':prezto:load' pmodule-allow-overrides 'yes'
+
+# Debug switch
+zstyle ':prezto' debug 'no'
 
 # Set case-sensitivity for completion, history lookup, etc.
 # zstyle ':prezto:*:*' case-sensitive 'yes'
@@ -17,12 +19,12 @@ zstyle ':prezto:load' pmodule-allow-overrides 'yes'
 zstyle ':prezto:*:*' color 'yes'
 zstyle ':prezto:environment:termcap' color 'yes'
 
-
 # Add additional directories to load prezto modules from
 # zstyle ':prezto:load' pmodule-dirs $HOME/.zprezto-contrib
 
 # Allow module overrides when pmodule-dirs causes module name collisions
-# zstyle ':prezto:load' pmodule-allow-overrides 'yes'
+# We overwrite/add scripts in contrib/<module> folder
+zstyle ':prezto:load' pmodule-allow-overrides 'yes'
 
 # Set the Zsh modules to load (man zshmodules).
 # zstyle ':prezto:load' zmodule 'attr' 'stat'
@@ -42,9 +44,11 @@ zstyle ':prezto:load' pmodule \
   'ssh' \
   'syntax-highlighting' \
   'spectrum' \
+  'gnu-utility' \
   'utility' \
   'completion' \
   'history-substring-search' \
+  'autosuggestions' \
   'prompt'
 
 #
@@ -81,7 +85,7 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 
 # Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'.
 # zstyle ':prezto:module:git:status:ignore' submodules 'all'
-zstyle ':prezto:module:git:alias' skip 'yes'
+# zstyle ':prezto:module:git:alias' skip 'no'
 #
 # GNU Utility
 #
@@ -92,18 +96,17 @@ zstyle ':prezto:module:git:alias' skip 'yes'
 #
 # History
 #
-zstyle ':prezto:module:history' histfile "${HOME}/.zsh_history"
 zstyle ':prezto:module:history' histignore "rm:ls:cd:cd -:pwd:exit:date:* --help"
 zstyle ':prezto:module:history' histcontrol "ignoredups"
 
 # Set the file to save the history in when an interactive shell exits.
-# zstyle ':prezto:module:history' histfile "${ZDOTDIR:-$HOME}/.zsh_history"
+zstyle ':prezto:module:history' histfile "${HOME}/.zsh_history"
 
 # Set the maximum  number  of  events  stored  in  the  internal history list.
-# zstyle ':prezto:module:history' histsize 10000
+zstyle ':prezto:module:history' histsize 10000
 
 # Set the maximum number of history events to save in the history file.
-# zstyle ':prezto:module:history' savehist 10000
+zstyle ':prezto:module:history' savehist 10000
 
 #
 # History Substring Search
@@ -248,3 +251,5 @@ zstyle ':prezto:module:ssh:load' identities 'id_ecdsa'
 # before deleting or overwriting files. Set to 'no' to disable this safer
 # behavior.
 # zstyle ':prezto:module:utility' safe-ops 'yes'
+
+zstyle ':prezto:module:utility' correct 'no'
