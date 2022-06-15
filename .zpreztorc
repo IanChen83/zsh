@@ -19,6 +19,18 @@ zstyle ':prezto' debug 'no'
 zstyle ':prezto:*:*' color 'yes'
 zstyle ':prezto:environment:termcap' color 'yes'
 
+# Based on vivid snazzy theme
+_red_color='#ff8b89'
+zstyle ':prompt:pure:path' color '#57c7ff'
+zstyle ':prompt:pure:git:branch' color '#999999'
+zstyle ':prompt:pure:git:dirty' color $_red_color
+zstyle ':prompt:pure:git:stash' show 'yes'
+zstyle ':prompt:pure:prompt:success' color '#57c7ff'
+zstyle ':prompt:pure:prompt:error' color $_red_color
+zstyle ':prompt:pure:execution_time' color '#666666'
+zstyle ':prompt:pure:suspended_jobs' color $_red_color
+unset _red_color
+
 # Add additional directories to load prezto modules from
 # zstyle ':prezto:load' pmodule-dirs $HOME/.zprezto-contrib
 
