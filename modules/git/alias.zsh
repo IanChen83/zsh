@@ -10,16 +10,16 @@
 #
 
 # Log
-zstyle -s ':prezto:module:git:log:medium' format '_git_log_medium_format' \
-    || _git_log_medium_format='%C(bold)Commit:%C(reset) %C(green)%H%C(red)%d%n%C(bold)Author:%C(reset) %C(cyan)%an <%ae>%n%C(bold)Date:%C(reset)   %C(blue)%ai (%ar)%C(reset)%n%+B'
-zstyle -s ':prezto:module:git:log:oneline' format '_git_log_oneline_format' \
-    || _git_log_oneline_format='%C(green)%h%C(reset) %s%C(red)%d%C(reset)%n'
-zstyle -s ':prezto:module:git:log:brief' format '_git_log_brief_format' \
-    || _git_log_brief_format='%C(green)%h%C(reset) %s%n%C(blue)(%ar by %an)%C(red)%d%C(reset)%n'
+# zstyle -s ':prezto:module:git:log:medium' format '_git_log_medium_format' \
+#     || _git_log_medium_format='%C(bold)Commit:%C(reset) %C(green)%H%C(red)%d%n%C(bold)Author:%C(reset) %C(cyan)%an <%ae>%n%C(bold)Date:%C(reset)   %C(blue)%ai (%ar)%C(reset)%n%+B'
+# zstyle -s ':prezto:module:git:log:oneline' format '_git_log_oneline_format' \
+#     || _git_log_oneline_format='%C(green)%h%C(reset) %s%C(red)%d%C(reset)%n'
+# zstyle -s ':prezto:module:git:log:brief' format '_git_log_brief_format' \
+#     || _git_log_brief_format='%C(green)%h%C(reset) %s%n%C(blue)(%ar by %an)%C(red)%d%C(reset)%n'
 
 # Status
-zstyle -s ':prezto:module:git:status:ignore' submodules '_git_status_ignore_submodules' \
-    || _git_status_ignore_submodules='none'
+# zstyle -s ':prezto:module:git:status:ignore' submodules '_git_status_ignore_submodules' \
+#     || _git_status_ignore_submodules='none'
 
 #
 # Aliases
@@ -28,41 +28,57 @@ zstyle -s ':prezto:module:git:status:ignore' submodules '_git_status_ignore_subm
 # My own alias
 
 if ! zstyle -t ':prezto:module:git:alias' skip; then
-  # Git
-  alias g='git'
+    read -r -d '' _git_aliases << EOF
+# Git
+alias g='git'
 
-	# Branch (b)
-	alias gb='git branch'
+# Branch (b)
+alias gb='git branch'
 
-	# Commit (c)
-	alias gc='git commit'
-	alias gco='git checkout'
-	alias gcp='git cherry-pick --ff'
+# Commit (c)
+alias gcm='git commit'
+alias gco='git checkout'
 
-	# Conflict (C)
-	# Data (d)
-	# Fetch (f)
-	# Index (i)
+# Cherry-Pick (C)
+alias gCp='git cherry-pick --ff'
 
-	# Log (l)
-	alias glg='git log --graph'
+# Log (l)
+alias glg='git log'
+alias glgg='git log --graph'
 
-	# Push/Pull (p)
-	alias gph='git push'
-	alias gpl='git pull'
+# Rebase (r)
+alias grb='git rebase'
+alias grba='git rebase --abort'
+alias grbc='git rebase --continue'
+alias grbi='git rebase --interactive'
+alias grbs='git rebase --skip'
 
-	# Rebase (r)
-	# Remote (R)
-	# Stash (s)
-	# Submodule (S)
-	# Tag (t)
+# Push/Pull (p)
+alias gph='git push'
+alias gpl='git pull'
 
-	# Working Copy (w)
-	alias gwa='git add'
-	alias gwd='git diff'
-	alias gd="echo 'please use gwd'"
-	alias gws='git status'
-	alias gwr='git reset'
+# Working Copy
+alias ga='git add'
+alias gd='git diff'
+alias gst='git status'
+alias grt='git reset'
+EOF
+
+    eval "${_git_aliases}"
+
+    function git-cheatsheet() {
+		local -a output
+
+		for line in "${(@f)_git_aliases}"; do
+			if [[ "$line" == "# "* ]]; then
+				output+=("" "%B%U%F{yellow}${line#"# "}%f%u%b")
+			elif [[ "$line" = *[[:space:]]* ]]; then
+				output+=("  %F{green}${line#alias }%f")
+			fi
+		done
+
+		echo "${(S%%)${(j.\n.)output}}"
+    }
 
 #   # Branch (b)
 #   alias gb='git branch'
